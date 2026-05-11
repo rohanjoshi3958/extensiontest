@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test src/**/*.test.js"
+    "test": "node --test src/**/*.test.js",
+    "smoke": "node src/smoke.js"
   }
 }
