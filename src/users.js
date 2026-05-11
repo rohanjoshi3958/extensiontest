@@ -2,6 +2,11 @@ import { getJson } from "./http.js";
 
 /** @typedef {{ id: string; name: string; email: string }} User */
 
+/** @param {string} value */
+export function normalizeEmail(value) {
+  return value.trim().toLowerCase();
+}
+
 /**
  * @param {string} userId
  * @returns {Promise<User>}
@@ -9,6 +14,16 @@ import { getJson } from "./http.js";
 export async function fetchUser(userId) {
   if (!userId?.trim()) throw new TypeError("userId required");
   return getJson(`/v1/users/${encodeURIComponent(userId)}`);
+}
+
+/**
+ * @param {string} email
+ * @returns {Promise<User | null>}
+ */
+export async function fetchUserByEmail(email) {
+  const list = await searchUsers(normalizeEmail(email));
+  const hit = list.find((u) => normalizeEmail(u.email) === normalizeEmail(email));
+  return hit ?? null;
 }
 
 /**

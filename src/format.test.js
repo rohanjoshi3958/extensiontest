@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { formatMoney, formatShortDate } from "./format.js";
+import { formatMoney, formatShortDate, truncateLabel } from "./format.js";
 
 test("formatMoney", () => {
   assert.equal(formatMoney(1999), "$19.99");
@@ -9,4 +9,9 @@ test("formatMoney", () => {
 
 test("formatShortDate invalid", () => {
   assert.equal(formatShortDate("not-a-date"), "—");
+});
+
+test("truncateLabel", () => {
+  assert.equal(truncateLabel("hi", 10), "hi");
+  assert.equal(truncateLabel("abcdefghijklm", 5), "abcd…");
 });

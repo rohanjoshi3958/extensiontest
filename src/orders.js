@@ -22,3 +22,12 @@ export function summarizeOrder(order) {
   const when = formatShortDate(order.placedAt);
   return `${order.id}: ${order.status} · ${total} · ${when}`;
 }
+
+/**
+ * @param {Order[]} orders
+ * @param {string[]} [statuses=['shipped','processing']]
+ */
+export function ordersMatchingStatus(orders, statuses = ["shipped", "processing"]) {
+  const set = new Set(statuses);
+  return orders.filter((o) => set.has(o.status));
+}

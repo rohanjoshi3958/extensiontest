@@ -21,3 +21,13 @@ export function formatShortDate(isoDate) {
     year: "numeric",
   });
 }
+
+/**
+ * @param {string} label
+ * @param {number} [max=32]
+ */
+export function truncateLabel(label, max = 32) {
+  const s = label.trim();
+  if (s.length <= max) return s;
+  return `${s.slice(0, Math.max(0, max - 1))}…`;
+}
