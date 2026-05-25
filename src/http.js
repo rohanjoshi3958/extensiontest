@@ -1,4 +1,5 @@
 import { config } from "./config.js";
+import { withRetries } from "./retry.js";
 
 /** @param {string} path */
 export function resolveApiUrl(path) {
@@ -13,6 +14,11 @@ export function resolveApiUrl(path) {
  * @param {RequestInit} [init]
  */
 export async function getJson(path, init = {}) {
+  return withRetries(() => getJsonOnce(path, init));
+}
+
+/** @param {string} path @param {RequestInit} init */
+async function getJsonOnce(path, init) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), config.requestTimeoutMs);
   const started = config.traceSlowRequests ? performance.now() : 0;

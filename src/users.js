@@ -35,3 +35,9 @@ export async function searchUsers(query) {
   if (q.length < 2) return [];
   return getJson(`/v1/users?q=${encodeURIComponent(q)}`);
 }
+
+/** @param {User} user */
+export function displayName(user) {
+  const name = user.name?.trim();
+  return name || user.email.split("@")[0] || "Unknown";
+}

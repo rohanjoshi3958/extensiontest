@@ -31,3 +31,10 @@ export function ordersMatchingStatus(orders, statuses = ["shipped", "processing"
   const set = new Set(statuses);
   return orders.filter((o) => set.has(o.status));
 }
+
+/**
+ * @param {Order[]} orders
+ */
+export function totalCents(orders) {
+  return orders.reduce((sum, o) => sum + (o.totalCents ?? 0), 0);
+}

@@ -31,3 +31,8 @@ export function truncateLabel(label, max = 32) {
   if (s.length <= max) return s;
   return `${s.slice(0, Math.max(0, max - 1))}…`;
 }
+
+/** @param {number} n */
+export function pad2(n) {
+  return String(n).padStart(2, "0");
+}
