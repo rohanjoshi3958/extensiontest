@@ -17,6 +17,22 @@ export async function getJson(path, init = {}) {
   return withRetries(() => getJsonOnce(path, init));
 }
 
+/**
+ * @param {string} path
+ * @param {unknown} body
+ * @param {RequestInit} [init]
+ */
+export async function postJson(path, body, init = {}) {
+  return withRetries(() =>
+    getJsonOnce(path, {
+      ...init,
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...init.headers },
+      body: JSON.stringify(body),
+    }),
+  );
+}
+
 /** @param {string} path @param {RequestInit} init */
 async function getJsonOnce(path, init) {
   const controller = new AbortController();

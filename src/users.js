@@ -1,4 +1,5 @@
 import { getJson } from "./http.js";
+import { isValidEmail } from "./validate.js";
 
 /** @typedef {{ id: string; name: string; email: string }} User */
 
@@ -21,6 +22,7 @@ export async function fetchUser(userId) {
  * @returns {Promise<User | null>}
  */
 export async function fetchUserByEmail(email) {
+  if (!isValidEmail(email)) return null;
   const list = await searchUsers(normalizeEmail(email));
   const hit = list.find((u) => normalizeEmail(u.email) === normalizeEmail(email));
   return hit ?? null;

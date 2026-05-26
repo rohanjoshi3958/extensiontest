@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test src/**/*.test.js",
-    "smoke": "node src/smoke.js"
+    "smoke": "node src/smoke.js",
+    "lint:noop": "node -e \"console.log('noop lint ok')\""
   }
 }
